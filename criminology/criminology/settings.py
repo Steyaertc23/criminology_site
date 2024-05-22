@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'crispy_forms',
+    'crispy_forms_foundation',
     'django.contrib.staticfiles',
+    'crimdb.apps.CrimdbConfig',
+    'register.apps.RegisterConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +59,7 @@ ROOT_URLCONF = 'criminology.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -106,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
@@ -118,7 +122,31 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+STATIC_FILES_DIRS = (
+    BASE_DIR / 'moviesdb' / 'static',
+    BASE_DIR / 'register' / 'static'
+)
+
+CRISPY_TEMPLATE_PACK = 'foundation-6'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+
+# Session info
+# from datetime import timedelta
+# AUTO_LOGOUT = {
+#     'SESSION_TIME':timedelta(days=1),
+#     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+#     'MESSAGE': 'The session has expired. Please login again to continue.'
+# }
